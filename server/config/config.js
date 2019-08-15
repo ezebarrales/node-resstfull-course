@@ -9,6 +9,6 @@ switch(process.env.ENV) {
         process.env.DB_CONNECTION = 'mongodb://localhost:27017/cafe';
         break;
     case 'prod':
-        process.env.DB_CONNECTION = 'mongodb+srv://root:75966957@cluster0-lhwh7.mongodb.net/test';
+        process.env.DB_CONNECTION = process.env.HEROKU_DB_URI;
         break;
 }
