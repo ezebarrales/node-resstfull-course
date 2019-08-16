@@ -2,10 +2,11 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const User = require('./../models/user');
+const { validateToken, validateAdmin } = require('./../middleware/authentication');
 
 const app = express();
 
-app.get('/user', (req, res) => {
+app.get('/user', validateToken, (req, res) => {
     
     let { from, limit } = req.query;
     from = Number(from) || 0;
@@ -49,7 +50,7 @@ app.get('/user', (req, res) => {
 
 });
 
-app.post('/user', (req, res) => {
+app.post('/user', [validateToken, validateAdmin], (req, res) => {
 
     const { body } = req;
     let { name, email, password, role } = body;
@@ -80,7 +81,7 @@ app.post('/user', (req, res) => {
     });
 });
 
-app.put('/user/:id', (req, res) => {
+app.put('/user/:id', [validateToken, validateAdmin], (req, res) => {
 
     const { id } = req.params;
     const { body } = req;
@@ -145,7 +146,7 @@ app.put('/user/:id', (req, res) => {
 });*/
 
 // Cambiar estado a false para ocultar el registro
-app.delete('/user/:id', (req, res) => {
+app.delete('/user/:id', [validateToken, validateAdmin], (req, res) => {
     
     const { id } = req.params;
 
