@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const VALID_ROLES = {
     values: ['ROLE_ADMIN', 'ROLE_USER'],
     message: '{VALUE} is not a valid role',
 };
 
-let User = new Schema({
+const User = new Schema({
     name: {
         type: String,
         required: [true, 'El nombre es necesario']

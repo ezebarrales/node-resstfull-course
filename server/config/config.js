@@ -18,7 +18,7 @@ process.env.ENCRIPT_SALT = 10;
 // JWT configuration
 // ================================================
 // JWT expiration
-process.env.JWT_EXPIRATION = 60 * 60;
+process.env.JWT_EXPIRATION = 60 * 60 * 60;
 // JWT secret
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'dev-sign-secret';
 

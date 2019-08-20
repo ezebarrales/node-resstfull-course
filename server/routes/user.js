@@ -28,7 +28,7 @@ app.get('/user', validateToken, (req, res) => {
                 });
             }
 
-            User.count({}, (err, count) => {
+            User.countDocuments({}, (err, count) => {
 
                 if(err) {
                     return res.status(400).json({
@@ -85,7 +85,7 @@ app.put('/user/:id', [validateToken, validateAdmin], (req, res) => {
 
     const { id } = req.params;
     const { body } = req;
-    let user = _.pick(body, [
+    let changes = _.pick(body, [
         'name',
         'email',
         'img',
@@ -99,7 +99,7 @@ app.put('/user/:id', [validateToken, validateAdmin], (req, res) => {
         context: 'query'
     };
 
-    User.findByIdAndUpdate(id, change, findOptions, (err, user) => {
+    User.findByIdAndUpdate(id, changes, findOptions, (err, user) => {
 
         if(err) {
             return res.status(400).json({
